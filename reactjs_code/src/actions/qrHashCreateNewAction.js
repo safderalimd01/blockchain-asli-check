@@ -10,7 +10,7 @@ import {
 export const fnQRHashCreateNew = (userdata, history) => dispatch => {
   dispatch(clearErrors());
   axios
-    .get(" http://127.0.0.1:5000/", userdata)
+    .get("http://localhost:5000", userdata)
     .then(res => {
 
       dispatch(setNewQRData(res));

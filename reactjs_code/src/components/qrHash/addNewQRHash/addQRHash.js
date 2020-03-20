@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import '../../../css/addNewQRHash.css';
 import { Input } from '@progress/kendo-react-inputs';
-import { DropDownList } from '@progress/kendo-react-dropdowns';
+// import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { Button } from '@progress/kendo-react-buttons';
 import BreadCrum from './../../layouts/breadcrum.js'; 
 import { fnQRHashCreateNew } from "../../../actions/qrHashCreateNewAction";
@@ -17,7 +17,7 @@ class NewQRHashInsert extends React.Component {
       value: new Date(),
       apartment_owner_address_data:[],
       tenant: false,
-      label:"New QR Hash"
+      label:"New QR Code"
     };
     if(this.props.location.pathname === "/apartment/grid/edit"){
       this.state.label = "Update"
@@ -36,7 +36,7 @@ class NewQRHashInsert extends React.Component {
 
   onClickButton = (event) => {
     if(event === "cancel"){
-      this.props.history.push('/apartment/grid');
+      this.props.history.push('/qr_hash/grid');
     }
     
     if(event === "add_new_unit"){
@@ -73,28 +73,33 @@ class NewQRHashInsert extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
-                      <DropDownList data={this.state.apartment_owner_address_data} label="Product Type" name="Apartment_owner_address" style={{ width: '100%' }} value={this.state.Apartment_owner_address}
-                        onChange={this.onChange}/>
+                        <Input
+                          className="input_field"
+                          name="Product"
+                          style={{ width: "100%" }}
+                          label="Product"
+                          value={this.state.Product}
+                          onChange={this.onChange}
+                          
+                        />
                       </div>
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
-                          name="start_date"
+                          name="Manufacturer"
                           style={{ width: "100%" }}
-                          label="Manufacture Date"
-                          type="date"
-                          value={this.state.start_date ? this.state.start_date:new Date()}
+                          label="Manufacturer"
+                          value={this.state.Manufacturer}
                           onChange={this.onChange}
                         />
                       </div>
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
-                          name="start_date"
+                          name="manufacture_location"
                           style={{ width: "100%" }}
-                          label="Expiry Date"
-                          type="date"
-                          value={this.state.start_date ? this.state.start_date:new Date()}
+                          label="Manufacture Location"
+                          value={this.state.manufacture_location}
                           onChange={this.onChange}
                         />
                       </div>
@@ -103,28 +108,38 @@ class NewQRHashInsert extends React.Component {
                     <div className="row">
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                         <Input
+                            className="input_field"
+                            name="manufacture_date"
+                            style={{ width: "100%" }}
+                            label="Manufacture Date"
+                            type="date"
+                            value={this.state.manufacture_date ? this.state.manufacture_date:new Date()}
+                            onChange={this.onChange}
+                          />
+                      </div>
+                      <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
+                      <Input
                           className="input_field"
-                          name="door_number"
+                          name="expiry_date"
                           style={{ width: "100%" }}
-                          label="Manufacture Location"
-                          value={this.state.door_number}
+                          label="Expiry Date"
+                          type="date"
+                          value={this.state.expiry_date ? this.state.expiry_date:new Date()}
                           onChange={this.onChange}
-                          
                         />
                       </div>
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                         <Input
                           className="input_field"
-                          name="street"
+                          name="batch_id"
                           style={{ width: "100%" }}
                           label="Batch Id"
-                          value={this.state.street}
+                          value={this.state.batch_id}
                           onChange={this.onChange}
                         />
                       </div>
-                      <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
-                      </div>
                     </div>
+                    
                     <div className="row">
                       <div className="col-md-4 col-sm-12 col-xs-12 xol-lg-4">
                         <div style={{ marginTop:"10px"}}>
@@ -190,6 +205,7 @@ class NewQRHashInsert extends React.Component {
       batch_id: "sysadmin@tss_demo03",
       url: "sysadmin1803"
     }
+
     this.props.fnQRHashCreateNew(userData,this.props.history)
     this.setState({ success: true,  });
     setTimeout(() => { this.setState({ success: false });  }, 3000);
