@@ -1,4 +1,4 @@
-var Coin = artifacts.require("Apartments");
+var Coin = artifacts.require("ProductVerification");
 
 module.exports = function(deployer) {
   deployer.deploy(Coin);

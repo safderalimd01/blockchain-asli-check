@@ -1,5 +1,5 @@
 import Web3 from './web3';
-import ApartmentDetails1 from "./contracts/Apartments.json"
+import ApartmentDetails1 from "./contracts/ProductVerification.json"
 
 var count = null
 if(Web3.eth.givenProvider.networkVersion === undefined){
@@ -7,7 +7,7 @@ if(Web3.eth.givenProvider.networkVersion === undefined){
 }else{
   count = Web3.eth.givenProvider.networkVersion
 }
-const address = ApartmentDetails1.networks['1584579223498'].address;
+const address = ApartmentDetails1.networks['1584702677310'].address;
 
 const abi = ApartmentDetails1.abi;
 

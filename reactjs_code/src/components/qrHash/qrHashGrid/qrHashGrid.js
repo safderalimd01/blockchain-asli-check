@@ -13,8 +13,9 @@ import { formatDate } from '@telerik/kendo-intl';
 import '../../../css/qrHashGrid.css';
 import { Link } from "react-router-dom";
 import BreadCrum from './../../layouts/breadcrum.js';  
+import web3 from '../../../web3';
+import product_Abi_address from '../../../ABI_&_Contract_Address';
 var QRCode = require('qrcode.react');
-
 
 products.forEach(o => {    o.orderDate = formatDate(new Date(o.orderDate), { date: "long" });
     o.expiryDate = formatDate(new Date(o.expiryDate), { date: "long" });
@@ -45,9 +46,9 @@ class QRHashGrid extends React.Component {
                 }
             }
         }
-        if(this.props.qr_hash.qrHashGrid!== null){
-            this.state.data[0]["ProductName"] = this.props.qr_hash.product
-        }
+        // if(this.props.qr_hash.qrHashGrid!== null){
+        //     this.state.data[0]["ProductName"] = this.props.qr_hash.product
+        // }
     }
     
     lastSelectedIndex = 0;
@@ -60,7 +61,7 @@ class QRHashGrid extends React.Component {
     AnchorTag = MyInventoryAnchorTag("inEdit");
     createState(skip, take) {
         return {
-            data: products.map(dataItem => Object.assign({ selected: false }, dataItem)),
+            data: [],
             total: products.length,
             skip: skip,
             pageSize: take,
@@ -86,7 +87,26 @@ class QRHashGrid extends React.Component {
         count: 0,
         flagdisabled: ""
     }
-    
+    async componentDidMount(){
+        const account = await web3.eth.personal.getAccounts();
+        var get_product_hash = await product_Abi_address.methods.getProductHash(0).call()
+        var get_product = await product_Abi_address.methods.getProducts().call()
+        var count = 0;
+
+        this.setState({
+            data: get_product.map(dataItem => Object.assign({ selected: false, id: count++}, dataItem)).slice(this.state.skip, this.state.skip + this.state.take),
+            all_accounts:account,
+            total: get_product_hash.length,
+            pageSize: this.state.take,
+            pageable: {
+                buttonCount: 0,
+                info: true,
+                type: 'numeric',
+                pageSizes: true,
+                previousNext: true
+            }
+        })
+    }
     pageChange(event) {
         this.setState(this.createState(event.page.skip, event.page.take));
     }
@@ -215,6 +235,7 @@ class QRHashGrid extends React.Component {
     }
 
     render() {
+        console.log(this.props.qr_hash)
         return (
             <div>
                 <div className="" style={{ margin:"16px" }}>
@@ -365,7 +386,7 @@ class QRHashGrid extends React.Component {
                                     }
                                 />
                                
-                                <Column field="ProductName"  title="Product Name" />
+                                <Column field="brand"  title="Product Name" />
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell} title="QR Image"/>
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell2} title="Decode"/>
                     

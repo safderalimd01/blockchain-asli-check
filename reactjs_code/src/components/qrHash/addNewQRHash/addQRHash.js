@@ -8,6 +8,8 @@ import { Input } from '@progress/kendo-react-inputs';
 import { Button } from '@progress/kendo-react-buttons';
 import BreadCrum from './../../layouts/breadcrum.js'; 
 import { fnQRHashCreateNew } from "../../../actions/qrHashCreateNewAction";
+import web3 from '../../../web3';
+import product_Abi_address from '../../../ABI_&_Contract_Address';
 var sha256 = require('js-sha256');
 var QRCode = require('qrcode.react');
 
@@ -40,7 +42,11 @@ class NewQRHashInsert extends React.Component {
     
 
   }
-
+  async componentDidMount(){
+    const account = await web3.eth.personal.getAccounts();
+    // const APartments_owner =  await product_Abi_address.methods.getApartmentOwner(this.props.match.params.id).call();
+    
+  }
   onClickButton = (event) => {
     if(event === "cancel"){
       this.props.history.push('/qr_hash/grid');
@@ -235,27 +241,34 @@ class NewQRHashInsert extends React.Component {
     var hash = sha256.create();
     hash.update(this.state.Product, this.state.Manufacturer, this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,this.state.expiry_date,"https://www.google.com/");
     var hash_value = hash.hex();
+   
+    const account = await web3.eth.personal.getAccounts();
+    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product, this.state.Manufacturer,this.state.Manufacturer,this.state.Manufacturer,this.state.Manufacturer,this.state.Manufacturer,this.state.manufacture_date,this.state.expiry_date,this.state.manufacture_location)
+    .send({
+          from:account[0], 
+          gas:3000000
+        });
     
     this.setState({ success: true, hash_value:hash_value,
       has_value_generate:true });
-      
+
     setTimeout(() => { this.setState({ success: false }); if(this.state.has_value_generate === true){
       const canvas = document.getElementById("123456");
-        const pngUrl = canvas
-            .toDataURL("image/png")
-            .replace("image/png", "image/octet-stream");
-        let downloadLink = document.createElement("a");
-        downloadLink.href = pngUrl;
-        downloadLink.download = "123456.png";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink)
-      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.props.history)
+      const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = "123456.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink)
+      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.state.Manufacturer,this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,new_product,this.props.history)
     } }, 3000);
   }
   
 }
-// export default NewQRHashInsert;
+
 NewQRHashInsert.propTypes = {
   qr_hash: PropTypes.object.isRequired
 };

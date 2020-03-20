@@ -6,6 +6,11 @@ import {
 const initialState = {
   qrHashGrid: null,
   product:null,
+  Manufacturer:null,
+  manufacture_location: null,
+  manufacture_date:null,
+  expiry_date:null,
+  new_product_data:[],
   loading: false
 };
 
@@ -21,6 +26,11 @@ export default function (state = initialState, action) {
         ...state,
         qrHashGrid: action.payload,
         product:action.detail,
+        Manufacturer:action.Manufacturer,
+        manufacture_location: action.manufacture_location,
+        manufacture_date:action.manufacture_date,
+        expiry_date:action.expiry_date,
+        new_product_data:action.create_product_data,
         loading: true
       };
     default:
