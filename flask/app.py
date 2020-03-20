@@ -4,6 +4,8 @@ import sys
 import hashlib
 import os
 from flask_cors import CORS, cross_origin
+from pyzbar.pyzbar import decode
+from PIL import Image
 
 app = Flask(__name__, static_url_path='/static')
 CORS(app)
@@ -42,6 +44,12 @@ def fn_hash(secret):
         return str(hash_sha256_key)
     except Exception as e:
         return str(e)
+
+@app.route("/qr_hash_value")
+def qrt():
+    qr = decode(Image.open(root+"/static/qr_code.png"))
+    qr_hash_value = qr[0].data.decode()
+    return {"qr_hash_value": qr_hash_value}, 200
 
 if __name__ == '__main__':
     app.run(debug=True)
