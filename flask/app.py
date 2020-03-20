@@ -3,8 +3,10 @@ import pyqrcode
 import sys
 import hashlib
 import os
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, static_url_path='/static')
+CORS(app)
 root = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 @app.route("/")
