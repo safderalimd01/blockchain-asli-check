@@ -7,7 +7,7 @@ import { Input } from '@progress/kendo-react-inputs';
 // import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { Button } from '@progress/kendo-react-buttons';
 import BreadCrum from './../../layouts/breadcrum.js'; 
-import { fnQRHashCreateNew } from "../../../actions/qrHashCreateNewAction";
+import { fnQRHashCreateNew, fnQRHashCreateNewAPI} from "../../../actions/qrHashCreateNewAction";
 import web3 from '../../../web3';
 import product_Abi_address from '../../../ABI_&_Contract_Address';
 var sha256 = require('js-sha256');
@@ -41,11 +41,6 @@ class NewQRHashInsert extends React.Component {
     }
     
 
-  }
-  async componentDidMount(){
-    const account = await web3.eth.personal.getAccounts();
-    // const APartments_owner =  await product_Abi_address.methods.getApartmentOwner(this.props.match.params.id).call();
-    
   }
   onClickButton = (event) => {
     if(event === "cancel"){
@@ -111,6 +106,34 @@ class NewQRHashInsert extends React.Component {
                           style={{ width: "100%" }}
                           label="Manufacturer"
                           value={this.state.Manufacturer}
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      
+                    </div>
+                    <div className="row">
+                      
+                      <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
+                      <Input
+                          className="input_field"
+                          name="Weight"
+                          style={{ width: "100%" }}
+                          label="Weight"
+                          value={this.state.Weight}
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      
+                    </div>
+                    <div className="row">
+                      
+                      <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
+                      <Input
+                          className="input_field"
+                          name="Dimensions"
+                          style={{ width: "100%" }}
+                          label="Dimensions"
+                          value={this.state.Dimensions}
                           onChange={this.onChange}
                         />
                       </div>
@@ -241,9 +264,9 @@ class NewQRHashInsert extends React.Component {
     var hash = sha256.create();
     hash.update(this.state.Product, this.state.Manufacturer, this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,this.state.expiry_date,"https://www.google.com/");
     var hash_value = hash.hex();
-   
+    console.log(product_Abi_address.methods)
     const account = await web3.eth.personal.getAccounts();
-    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product, this.state.Manufacturer,this.state.Manufacturer,this.state.Manufacturer,this.state.Manufacturer,this.state.Manufacturer,this.state.manufacture_date,this.state.expiry_date,this.state.manufacture_location)
+    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product, this.state.Manufacturer,this.state.Weight,this.state.Dimensions,this.state.expiry_date,this.state.manufacture_date,this.state.manufacture_location)
     .send({
           from:account[0], 
           gas:3000000
@@ -251,7 +274,15 @@ class NewQRHashInsert extends React.Component {
     
     this.setState({ success: true, hash_value:hash_value,
       has_value_generate:true });
-
+    //   userData={
+    //     product_type :str(data.get('product_type'))
+    //     manufacturer_date : str(data.get('manufacturer_date'))
+    //     expiry_date = str(data.get('expiry_date'))
+    //     manufacturer_location = str(data.get('manufacturer_location'))
+    //    batch_id = str(data.get('batch_id'))
+    //     urls = str(data.get('url'))
+    //   }
+    // this.props.fnQRHashCreateNewAPI(userData)
     setTimeout(() => { this.setState({ success: false }); if(this.state.has_value_generate === true){
       const canvas = document.getElementById("123456");
       const pngUrl = canvas
@@ -276,5 +307,5 @@ const mapStateToProps = state => ({
   qr_hash: state.qr_hash
 });
 
-export default connect(mapStateToProps, { fnQRHashCreateNew }
+export default connect(mapStateToProps, { fnQRHashCreateNew, fnQRHashCreateNewAPI }
   )(NewQRHashInsert);

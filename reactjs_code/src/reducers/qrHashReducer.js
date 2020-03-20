@@ -1,6 +1,7 @@
 import {
   GET_QR_HASH,
-  QR_HASH_LOADING
+  QR_HASH_LOADING,
+  GET_QR_HASH_PRODUCT_DATA,
 } from "../actions/types";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   manufacture_date:null,
   expiry_date:null,
   new_product_data:[],
+  qrHashGridCreateDataAPI:null,
   loading: false
 };
 
@@ -32,6 +34,11 @@ export default function (state = initialState, action) {
         expiry_date:action.expiry_date,
         new_product_data:action.create_product_data,
         loading: true
+      };
+    case GET_QR_HASH_PRODUCT_DATA:
+      return {
+        ...state,
+        qrHashGridCreateDataAPI: action.payload,
       };
     default:
       return state;

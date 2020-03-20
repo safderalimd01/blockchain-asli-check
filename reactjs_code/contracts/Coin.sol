@@ -1,7 +1,7 @@
 pragma solidity ^0.6.3;
 pragma experimental ABIEncoderV2;
 
-contract  ProductVerification{
+ contract  ProductVerification{
     address public contractOwnerAddress;
     uint256 product_id_generator;
 
@@ -13,26 +13,22 @@ contract  ProductVerification{
     struct product{
         uint256 product_id;
         string product_hash ;
-        string brand;
-        string model;
+        string product_uns;
+        string product_name;
         string weight;
-        string dimension;
-        string camera_pixel;
-        string battery_lifetime;
-        string wireless_range;
+        string packing_dimension;
+        string expiry_date;
         string manufacturing_date;
         string manufacturing_location;
     }
     
     struct product_bundle{
         string product_hash;
-        string brand;
-        string model;
+        string product_uns;
+        string product_name;
         string weight;
-        string dimension;
-        string camera_pixel;
-        string battery_lifetime;
-        string wireless_range;
+        string packing_dimension;
+        string expiry_date;
         string manufacturing_date;
         string manufacturing_location;
     }
@@ -48,25 +44,21 @@ contract  ProductVerification{
     }
 
     function createproduct(string memory _product_hash, 
-                            string memory _brand,
-                            string memory _model,
+                            string memory _product_uns,
+                            string memory _product_name,
                             string memory _weight,
-                            string memory _dimension,
-                            string memory _camera_pixel,
-                            string memory _battery_lifetime,
-                            string memory _wireless_range,
+                            string memory _packing_dimension,
+                            string memory _expiry_date,
                             string memory _manufacturing_date,
                             string memory _manufacturing_location) public {
             
             product_listing.push(product(product_id_generator++,
                                         _product_hash, 
-                                        _brand,
-                                        _model,
+                                        _product_uns,
+                                        _product_name,
                                         _weight,
-                                        _dimension,
-                                        _camera_pixel,
-                                        _battery_lifetime,
-                                        _wireless_range,
+                                        _packing_dimension,
+                                        _expiry_date,
                                         _manufacturing_date,
                                         _manufacturing_location));
 
@@ -80,13 +72,11 @@ contract  ProductVerification{
         product_bundle[] memory temp = new product_bundle[](product_listing.length);
         for(uint128 i; i < product_listing.length;i++){
             temp[i] = product_bundle(product_listing[i].product_hash,
-                                        product_listing[i].brand,
-                                        product_listing[i].model,
+                                        product_listing[i].product_uns,
+                                        product_listing[i].product_name,
                                         product_listing[i].weight,
-                                        product_listing[i].dimension,
-                                        product_listing[i].camera_pixel,
-                                        product_listing[i].battery_lifetime,
-                                        product_listing[i].wireless_range,
+                                        product_listing[i].packing_dimension,
+                                        product_listing[i].expiry_date,
                                         product_listing[i].manufacturing_date,
                                         product_listing[i].manufacturing_location
                                         );
@@ -113,4 +103,3 @@ contract  ProductVerification{
 
 
  }
- 

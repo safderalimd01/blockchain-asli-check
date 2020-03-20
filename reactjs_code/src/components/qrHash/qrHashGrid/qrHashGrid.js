@@ -46,9 +46,9 @@ class QRHashGrid extends React.Component {
                 }
             }
         }
-        // if(this.props.qr_hash.qrHashGrid!== null){
-        //     this.state.data[0]["ProductName"] = this.props.qr_hash.product
-        // }
+        if(this.props.qr_hash.qrHashGrid!== null){
+            // this.state.data[0]["ProductName"] = this.props.qr_hash.product
+        }
     }
     
     lastSelectedIndex = 0;
@@ -92,7 +92,7 @@ class QRHashGrid extends React.Component {
         var get_product_hash = await product_Abi_address.methods.getProductHash(0).call()
         var get_product = await product_Abi_address.methods.getProducts().call()
         var count = 0;
-
+        console.log(get_product)
         this.setState({
             data: get_product.map(dataItem => Object.assign({ selected: false, id: count++}, dataItem)).slice(this.state.skip, this.state.skip + this.state.take),
             all_accounts:account,
@@ -235,7 +235,6 @@ class QRHashGrid extends React.Component {
     }
 
     render() {
-        console.log(this.props.qr_hash)
         return (
             <div>
                 <div className="" style={{ margin:"16px" }}>
@@ -386,7 +385,7 @@ class QRHashGrid extends React.Component {
                                     }
                                 />
                                
-                                <Column field="brand"  title="Product Name" />
+                                <Column field="product_uns"  title="Product Name" />
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell} title="QR Image"/>
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell2} title="Decode"/>
                     
