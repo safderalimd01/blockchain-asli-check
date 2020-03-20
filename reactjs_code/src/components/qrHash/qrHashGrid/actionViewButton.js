@@ -23,7 +23,15 @@ export function MyCommandCell2({ editField, tenant }) {
                 <Button className="button-save-details" onClick={this.togglePopup.bind(this)}>Decode</Button>
                 {this.state.showPopup ? 
                 <Popup
-                    text='Close Me'
+                    text={tenant.qr_hash}
+                    qrHashGrid={tenant.qr_hash.qrHashGrid}
+                    product={tenant.qr_hash.product}
+                    Manufacturer={tenant.qr_hash.Manufacturer}
+                    manufacture_location={tenant.qr_hash.manufacture_location}
+                    manufacture_date={tenant.qr_hash.manufacture_date}
+                    expiry_date={tenant.qr_hash.expiry_date}
+                    Weight={tenant.qr_hash.Weight}
+                    Dimensions={tenant.qr_hash.Dimensions}
                     closePopup={this.togglePopup.bind(this)}
                 />
                 : null

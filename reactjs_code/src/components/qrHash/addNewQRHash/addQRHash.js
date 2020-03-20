@@ -294,7 +294,7 @@ class NewQRHashInsert extends React.Component {
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink)
-      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.state.Manufacturer,this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,new_product,this.props.history)
+      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.state.Manufacturer,this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,new_product,this.state.Weight,this.state.Dimensions,this.props.history)
     } }, 3000);
   }
   

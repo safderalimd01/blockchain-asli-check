@@ -7,7 +7,7 @@ import ApartmentDetails1 from "./contracts/ProductVerification.json"
 // }else{
 //   count = Web3.eth.givenProvider.networkVersion
 // }
-const address = ApartmentDetails1.networks['1584706149805'].address;
+const address = ApartmentDetails1.networks['1584707478901'].address;
 
 const abi = ApartmentDetails1.abi;
 

@@ -13,6 +13,8 @@ const initialState = {
   expiry_date:null,
   new_product_data:[],
   qrHashGridCreateDataAPI:null,
+  Weight:null,
+  Dimensions:null,
   loading: false
 };
 
@@ -33,6 +35,8 @@ export default function (state = initialState, action) {
         manufacture_date:action.manufacture_date,
         expiry_date:action.expiry_date,
         new_product_data:action.create_product_data,
+        Weight:action.Weight,
+        Dimensions:action.Dimensions,
         loading: true
       };
     case GET_QR_HASH_PRODUCT_DATA:

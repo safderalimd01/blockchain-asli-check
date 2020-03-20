@@ -92,7 +92,6 @@ class QRHashGrid extends React.Component {
         var get_product_hash = await product_Abi_address.methods.getProductHash(0).call()
         var get_product = await product_Abi_address.methods.getProducts().call()
         var count = 0;
-        console.log(get_product)
         this.setState({
             data: get_product.map(dataItem => Object.assign({ selected: false, id: count++}, dataItem)).slice(this.state.skip, this.state.skip + this.state.take),
             all_accounts:account,

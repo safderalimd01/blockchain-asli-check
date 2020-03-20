@@ -8,20 +8,20 @@ import {
 
 
 
-export const fnQRHashCreateNew = (userdata, product,Manufacturer,manufacture_location,manufacture_date, expiry_date, create_product_data,history) => dispatch => {
+export const fnQRHashCreateNew = (userdata, product,Manufacturer,manufacture_location,manufacture_date, expiry_date, create_product_data,Weight,Dimensions,history) => dispatch => {
   dispatch(clearErrors());
-  dispatch(setNewQRData(userdata, product, Manufacturer, manufacture_location,manufacture_date, expiry_date, create_product_data));
+  dispatch(setNewQRData(userdata, product, Manufacturer, manufacture_location,manufacture_date, expiry_date, create_product_data,Weight,Dimensions,));
   history.push("/qr_hash/grid")
 };
 
-export const fnQRHashCreateNewAPI = (userdata, product,Manufacturer,manufacture_location,manufacture_date, expiry_date, create_product_data,history) => dispatch => {
+export const fnQRHashCreateNewAPI = (userdata, product,Manufacturer,manufacture_location,manufacture_date, expiry_date, create_product_data,Weight,Dimensions,history) => dispatch => {
   dispatch(clearErrors());
   dispatch(setNewQRCreateData(userdata));
   history.push("/qr_hash/grid")
 };
 
 //GetAllProfile
-export const setNewQRData = (CompanyDetails,product, Manufacturer, manufacture_location,manufacture_date, expiry_date, create_product_data) => {
+export const setNewQRData = (CompanyDetails,product, Manufacturer, manufacture_location,manufacture_date, expiry_date, create_product_data, Weight,Dimensions) => {
   return {
     type: GET_QR_HASH,
     payload: CompanyDetails,
@@ -30,7 +30,9 @@ export const setNewQRData = (CompanyDetails,product, Manufacturer, manufacture_l
     manufacture_location: manufacture_location,
     manufacture_date:manufacture_date,
     expiry_date:expiry_date,
-    new_product_data:create_product_data
+    new_product_data:create_product_data,
+    Weight:Weight,
+    Dimensions:Dimensions
   };
 };
 
