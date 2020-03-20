@@ -1,6 +1,6 @@
 import React from 'react';
-// import PropTypes from "prop-types";
-// import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Grid, GridColumn as Column, GridToolbar } from '@progress/kendo-react-grid';
 import { ExcelExport } from '@progress/kendo-react-excel-export';
 import products from './qrData.json';
@@ -19,7 +19,7 @@ products.forEach(o => {    o.orderDate = formatDate(new Date(o.orderDate), { dat
     o.shippedDate = o.shippedDate === 'NULL' ? undefined : new Date(o.shippedDate);
 });
 
-class App extends React.Component {
+class QRHashGrid extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.createState(0, 10);
@@ -42,6 +42,7 @@ class App extends React.Component {
                 }
             }
         }
+        
     }
     
     lastSelectedIndex = 0;
@@ -370,14 +371,14 @@ class App extends React.Component {
         );
     }
 }
-export default App;
+// export default App;
 
-// App.propTypes = {
-//     apartment: PropTypes.object.isRequired
-//   };
-// const mapStateToProps = state => ({
-//     apartment: state.apartment
-//   });
+QRHashGrid.propTypes = {
+    apartments: PropTypes.object.isRequired
+  };
+const mapStateToProps = state => ({
+    qr_hash: state.apartment
+  });
 
-// export default connect(mapStateToProps, {  }
-//     )(App);
+export default connect(mapStateToProps, {  }
+    )(QRHashGrid);

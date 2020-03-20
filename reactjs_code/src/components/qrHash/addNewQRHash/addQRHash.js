@@ -1,12 +1,14 @@
 import React from "react";
 // import '../../../css/header.css';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import '../../../css/addNewQRHash.css';
 import { Input } from '@progress/kendo-react-inputs';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { Button } from '@progress/kendo-react-buttons';
 import BreadCrum from './../../layouts/breadcrum.js'; 
-
-class ProductDetail extends React.Component {
+import { fnQRHashCreateNew } from "../../../actions/qrHashCreateNewAction";
+class NewQRHashInsert extends React.Component {
   constructor(props) {
     super(props);
 
@@ -180,8 +182,26 @@ class ProductDetail extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    var userData={
+      product_type: "sysadmin@tss_demo03",
+      manufacturer_date: "sysadmin1803",
+      expiry_date: "sysadmin@tss_demo03",
+      manufacturer_location: "sysadmin1803",
+      batch_id: "sysadmin@tss_demo03",
+      url: "sysadmin1803"
+    }
+    this.props.fnQRHashCreateNew(userData,this.props.history)
     this.setState({ success: true,  });
     setTimeout(() => { this.setState({ success: false });  }, 3000);
   }
 }
-export default ProductDetail;
+// export default NewQRHashInsert;
+NewQRHashInsert.propTypes = {
+  apartments: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  qr_hash: state.apartment
+});
+
+export default connect(mapStateToProps, { fnQRHashCreateNew }
+  )(NewQRHashInsert);
