@@ -5,6 +5,7 @@ import {
 
 const initialState = {
   qrHashGrid: null,
+  product:null,
   loading: false
 };
 
@@ -18,7 +19,8 @@ export default function (state = initialState, action) {
     case GET_QR_HASH:
       return {
         ...state,
-        qrHashGrid: action.payload.data,
+        qrHashGrid: action.payload,
+        product:action.detail,
         loading: true
       };
     default:

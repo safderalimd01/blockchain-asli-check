@@ -8,7 +8,11 @@ import { Input } from '@progress/kendo-react-inputs';
 import { Button } from '@progress/kendo-react-buttons';
 import BreadCrum from './../../layouts/breadcrum.js'; 
 import { fnQRHashCreateNew } from "../../../actions/qrHashCreateNewAction";
+var sha256 = require('js-sha256');
+var QRCode = require('qrcode.react');
+
 class NewQRHashInsert extends React.Component {
+  
   constructor(props) {
     super(props);
 
@@ -17,7 +21,9 @@ class NewQRHashInsert extends React.Component {
       value: new Date(),
       apartment_owner_address_data:[],
       tenant: false,
-      label:"New QR Code"
+      label:"New QR Code",
+      hash_value:0,
+      has_value_generate:false
     };
     if(this.props.location.pathname === "/apartment/grid/edit"){
       this.state.label = "Update"
@@ -32,6 +38,7 @@ class NewQRHashInsert extends React.Component {
       this.state.link = "/apartment/grid";
     }
     
+
   }
 
   onClickButton = (event) => {
@@ -51,7 +58,11 @@ class NewQRHashInsert extends React.Component {
 
     })
   }
+  
   render() {
+  
+    
+
     
     return (
       <div>
@@ -159,8 +170,14 @@ class NewQRHashInsert extends React.Component {
                     
                     <div className="row">
                       <div className="col-md-4 col-sm-12 col-xs-12 xol-lg-4">
-                        <div style={{ marginTop:"10px"}}>
-                          {/* <Button className="button-save-details" onClick={() => { this.onClickButton("add_new_unit") }}>Add Unit</Button> */}
+                        <div style={{ marginTop:"10px",display:"none"}}>
+                          <QRCode
+                            id="123456"
+                            value={this.state.hash_value}
+                            size={290}
+                            level={"H"}
+                            includeMargin={true}
+                          />
                         </div>
                       </div>
                     </div>
@@ -211,29 +228,39 @@ class NewQRHashInsert extends React.Component {
       </div>
     );
   }
-
+  
   handleSubmit = async (event) => {
     event.preventDefault();
-    var userData={
-      product_type: "sysadmin@tss_demo03",
-      manufacturer_date: "sysadmin1803",
-      expiry_date: "sysadmin@tss_demo03",
-      manufacturer_location: "sysadmin1803",
-      batch_id: "sysadmin@tss_demo03",
-      url: "sysadmin1803"
-    }
-
-    this.props.fnQRHashCreateNew(userData,this.props.history)
-    this.setState({ success: true,  });
-    setTimeout(() => { this.setState({ success: false });  }, 3000);
+    
+    var hash = sha256.create();
+    hash.update(this.state.Product, this.state.Manufacturer, this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,this.state.expiry_date,"https://www.google.com/");
+    var hash_value = hash.hex();
+    
+    this.setState({ success: true, hash_value:hash_value,
+      has_value_generate:true });
+      
+    setTimeout(() => { this.setState({ success: false }); if(this.state.has_value_generate === true){
+      const canvas = document.getElementById("123456");
+        const pngUrl = canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "123456.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink)
+      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.props.history)
+    } }, 3000);
   }
+  
 }
 // export default NewQRHashInsert;
 NewQRHashInsert.propTypes = {
-  apartments: PropTypes.object.isRequired
+  qr_hash: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  qr_hash: state.apartment
+  qr_hash: state.qr_hash
 });
 
 export default connect(mapStateToProps, { fnQRHashCreateNew }

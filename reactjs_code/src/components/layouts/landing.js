@@ -13,9 +13,6 @@ export class Landing extends React.Component {
           </div>
           <div className="row">
             <div className="col-md-2 col-lg-2">
-              {/* <div className="service-29128 text-center">
-               <b><Link to="/apartment/grid">Apartment Admin</Link></b>
-              </div> */}
             </div>
             <div className="col-md-8 col-lg-8">
               <div className="service-29128 text-center">
@@ -23,9 +20,6 @@ export class Landing extends React.Component {
               </div>
             </div>
             <div className="col-md-2 col-lg-2">
-              {/* <div className="service-29128 text-center">
-              <b><Link to="/contract-code">Block chain contract code</Link></b>
-              </div> */}
             </div>
             </div>
             <br/>

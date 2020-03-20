@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import {
   GET_QR_HASH,
   CLEAR_ERRORS
@@ -7,23 +7,18 @@ import {
 
 
 
-export const fnQRHashCreateNew = (userdata, history) => dispatch => {
+export const fnQRHashCreateNew = (userdata, product, history) => dispatch => {
   dispatch(clearErrors());
-  axios
-    .get("http://localhost:5000", userdata)
-    .then(res => {
-
-      dispatch(setNewQRData(res));
-      history.push("/qr_hash/grid")
-    })
-    .catch(err => { console.log(err) });
+  dispatch(setNewQRData(userdata, product));
+  history.push("/qr_hash/grid")
 };
 
 //GetAllProfile
-export const setNewQRData = (CompanyDetails) => {
+export const setNewQRData = (CompanyDetails,product) => {
   return {
     type: GET_QR_HASH,
-    payload: CompanyDetails
+    payload: CompanyDetails,
+    detail:product
   };
 };
 // clear errors

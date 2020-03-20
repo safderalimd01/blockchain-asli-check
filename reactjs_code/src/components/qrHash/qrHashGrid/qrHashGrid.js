@@ -13,6 +13,8 @@ import { formatDate } from '@telerik/kendo-intl';
 import '../../../css/qrHashGrid.css';
 import { Link } from "react-router-dom";
 import BreadCrum from './../../layouts/breadcrum.js';  
+var QRCode = require('qrcode.react');
+
 
 products.forEach(o => {    o.orderDate = formatDate(new Date(o.orderDate), { date: "long" });
     o.expiryDate = formatDate(new Date(o.expiryDate), { date: "long" });
@@ -24,6 +26,7 @@ class QRHashGrid extends React.Component {
         super(props);
         this.state = this.createState(0, 10);
         this.state.searchButton= false;
+        this.state.data2 = "product"
         this.pageChange = this.pageChange.bind(this);
         this.state.apartments_data = [];
         this.state.tenant = false;
@@ -42,7 +45,9 @@ class QRHashGrid extends React.Component {
                 }
             }
         }
-        
+        if(this.props.qr_hash.qrHashGrid!== null){
+            this.state.data[0]["ProductName"] = this.props.qr_hash.product
+        }
     }
     
     lastSelectedIndex = 0;
@@ -215,6 +220,14 @@ class QRHashGrid extends React.Component {
                 <div className="" style={{ margin:"16px" }}>
                     <BreadCrum tenant = {this.state.tenant} new_qr_screen = {true} qr_hash_label={this.state.apartment}/>
                     <br/>
+                    {this.props.qr_hash.qrHashGrid !== null?<QRCode
+                            id="12345678"
+                            value={this.props.qr_hash.qrHashGrid}
+                            size={290}
+                            level={"H"}
+                            includeMargin={true}
+                            style={{display:"none"}}
+                          />:null}
                     <div className="apartment_grid_toolbar_div">
                     <div
                                     style={{ fontFamily: "Roboto ,Helvetica, Arial, sans-serif ", float: "left", marginBottom:"10px", fontSize: "20px", fontWeight: "500", color: "rgba (0,0,0,0.87)" }}
@@ -348,7 +361,7 @@ class QRHashGrid extends React.Component {
                                     width="50px"
                                     marginLeft="100px"
                                     headerSelectionValue={
-                                        this.state.data.lenght === 0 ? this.state.data:this.state.data.findIndex(dataItem => dataItem.selected === false) === -1
+                                        this.state.data.length === 0 ? this.state.data:this.state.data.findIndex(dataItem => dataItem.selected === false) === -1
                                     }
                                 />
                                
@@ -369,16 +382,16 @@ class QRHashGrid extends React.Component {
 
 </div>
         );
+        
     }
 }
 // export default App;
 
 QRHashGrid.propTypes = {
-    apartments: PropTypes.object.isRequired
+    qr_hash: PropTypes.object.isRequired
   };
 const mapStateToProps = state => ({
-    qr_hash: state.apartment
+    qr_hash: state.qr_hash
   });
 
-export default connect(mapStateToProps, {  }
-    )(QRHashGrid);
+export default connect(mapStateToProps)(QRHashGrid);
