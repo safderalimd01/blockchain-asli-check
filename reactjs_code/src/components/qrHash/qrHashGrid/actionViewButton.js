@@ -20,7 +20,7 @@ export function MyCommandCell2({ editField, tenant }) {
             const inEdit = dataItem[editField];
             
             return inEdit ? null : (<td className="">
-                <Button className="button-save-details" onClick={this.togglePopup.bind(this)}>View</Button>
+                <Button className="button-save-details" onClick={this.togglePopup.bind(this)}>Decode</Button>
                 {this.state.showPopup ? 
                 <Popup
                     text='Close Me'

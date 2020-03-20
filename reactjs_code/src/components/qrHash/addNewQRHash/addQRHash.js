@@ -83,6 +83,10 @@ class NewQRHashInsert extends React.Component {
                           
                         />
                       </div>
+                      
+                    </div>
+                    <div className="row">
+                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -93,6 +97,10 @@ class NewQRHashInsert extends React.Component {
                           onChange={this.onChange}
                         />
                       </div>
+                      
+                    </div>
+                    <div className="row">
+                     
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -117,6 +125,10 @@ class NewQRHashInsert extends React.Component {
                             onChange={this.onChange}
                           />
                       </div>
+                      
+                    </div>
+                    <div className="row">
+                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -128,6 +140,10 @@ class NewQRHashInsert extends React.Component {
                           onChange={this.onChange}
                         />
                       </div>
+                      
+                    </div>
+                    <div className="row">
+                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                         <Input
                           className="input_field"
@@ -140,6 +156,7 @@ class NewQRHashInsert extends React.Component {
                       </div>
                     </div>
                     
+                    
                     <div className="row">
                       <div className="col-md-4 col-sm-12 col-xs-12 xol-lg-4">
                         <div style={{ marginTop:"10px"}}>
@@ -149,7 +166,7 @@ class NewQRHashInsert extends React.Component {
                     </div>
                     <div className="row" style={{ float: "right"}}>
                       <div style={{ float: "right", marginTop:"10px"}}>
-                        <Button className="button-save-details" >Save</Button>
+                        <Button className="button-save-details" >Generate QR</Button>
                         <Button className="button-cancel-details" onClick={() => { this.onClickButton("cancel") }} >Cancel</Button>
                       </div>
                     </div>

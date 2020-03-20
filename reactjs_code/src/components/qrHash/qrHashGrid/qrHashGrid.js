@@ -352,9 +352,9 @@ class QRHashGrid extends React.Component {
                                     }
                                 />
                                
-                                <Column field="ProductName"  title="Name" />
+                                <Column field="ProductName"  title="Product Name" />
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell} title="QR Image"/>
-                                <Column field="apartment_name" filterable={false} cell={this.CommandCell2} title="View"/>
+                                <Column field="apartment_name" filterable={false} cell={this.CommandCell2} title="Decode"/>
                     
                 </Grid>
             </ExcelExport>
