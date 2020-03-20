@@ -1,0 +1,74 @@
+.service-29128 {
+  background-color: #fff;
+  padding: 20px;
+}
+.service-29128:hover {
+  box-shadow: 0 4px 30px -5px rgba(0,0,0,.2);
+}
+
+.service-29128 .wrap-icon {
+  margin-bottom: 30px;
+  color: #364d59!important;
+}
+.d-block {
+  display: block!important;
+  color: #364d59!important;
+}
+.service-29128 .wrap-icon>span {
+  font-size: 30px;
+  color: #364d59!important;
+}
+.service-29128 h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.site-section {
+  padding: 7rem 0;
+  /* background-color: #727272; */
+}
+.site-section-homepage{
+  padding: 2rem 0;
+  background-color: #727272;
+}
+
+.landing_page{
+  text-align: start;
+}
+
+.landing_page_div{
+  margin-left: 60px;
+  margin-top: 60px;
+}
+
+.success_message_circle{
+  /* border:1px solid green; */
+  background-color: #1BC437;
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+}
+.check_squre_icon{
+  font-size: 25px;
+  color: #fff;
+  font-weight: lighter;
+  margin-top: 14px;
+  margin-left: 3px;
+  z-index: 10000 !important;
+}
+
+.success_message_content_div{
+  margin-left: 10px;
+  text-align: left;
+}
+
+.success_message_h6{
+  color: #19CE37;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.success_message_paragraph{
+  margin-bottom: 0px;
+  color: #333;
+}
