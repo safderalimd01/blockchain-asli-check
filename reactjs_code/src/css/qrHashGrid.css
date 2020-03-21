@@ -274,3 +274,6 @@
   z-index: 1000;
 }
 
+.apartment_grid_toolbar_div input, .k-grid-toolbar, .search-input2 {
+  display: inline !important;
+}

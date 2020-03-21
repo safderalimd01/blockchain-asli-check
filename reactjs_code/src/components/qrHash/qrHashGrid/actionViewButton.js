@@ -18,7 +18,6 @@ export function MyCommandCell2({ editField, tenant }) {
         render() {
             const { dataItem } = this.props;
             const inEdit = dataItem[editField];
-            console.log(dataItem)
             return inEdit ? null : (<td className="">
                 <Button className="button-save-details" onClick={this.togglePopup.bind(this)}>Decode</Button>
                 {this.state.showPopup ? 
@@ -32,6 +31,7 @@ export function MyCommandCell2({ editField, tenant }) {
                     expiry_date={dataItem.expiry_date}
                     Weight={dataItem.weight}
                     Dimensions={dataItem.packing_dimension}
+                    manufacturing_batchid={dataItem.manufacturing_batchid}
                     closePopup={this.togglePopup.bind(this)}
                 />
                 : null

@@ -163,10 +163,10 @@ class NewQRHashInsert extends React.Component {
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                         <Input
                           className="input_field"
-                          name="batch_id"
+                          name="Manufacturing_batch_id"
                           style={{ width: "100%" }}
                           label="Batch Id"
-                          value={this.state.batch_id}
+                          value={this.state.Manufacturing_batch_id}
                           onChange={this.onChange}
                         />
                       </div>
@@ -236,7 +236,7 @@ class NewQRHashInsert extends React.Component {
     hash.update(this.state.Product, this.state.Product_uns, this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,this.state.expiry_date,"https://www.google.com/");
     var hash_value = hash.hex();
     const account = await web3.eth.personal.getAccounts();
-    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product_uns,this.state.Product, this.state.Weight,this.state.Dimensions,this.state.expiry_date,this.state.manufacture_date,this.state.manufacture_location)
+    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product_uns,this.state.Product, this.state.Weight,this.state.Dimensions,this.state.expiry_date,this.state.manufacture_date,this.state.manufacture_location,this.state.Manufacturing_batch_id)
     .send({
           from:account[0], 
           gas:3000000

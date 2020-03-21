@@ -20,6 +20,7 @@ pragma experimental ABIEncoderV2;
         string expiry_date;
         string manufacturing_date;
         string manufacturing_location;
+        string manufacturing_batchid;
     }
     
     struct product_bundle{
@@ -31,6 +32,7 @@ pragma experimental ABIEncoderV2;
         string expiry_date;
         string manufacturing_date;
         string manufacturing_location;
+        string manufacturing_batchid;
     }
 
     constructor() public{
@@ -50,7 +52,8 @@ pragma experimental ABIEncoderV2;
                             string memory _packing_dimension,
                             string memory _expiry_date,
                             string memory _manufacturing_date,
-                            string memory _manufacturing_location) public {
+                            string memory _manufacturing_location,
+                            string memory _manufacturing_batchid) public {
             
             product_listing.push(product(product_id_generator++,
                                         _product_hash, 
@@ -60,7 +63,8 @@ pragma experimental ABIEncoderV2;
                                         _packing_dimension,
                                         _expiry_date,
                                         _manufacturing_date,
-                                        _manufacturing_location));
+                                        _manufacturing_location,
+                                        _manufacturing_batchid));
 
             personal[msg.sender][1].push(product_id_generator);
         }
@@ -78,7 +82,8 @@ pragma experimental ABIEncoderV2;
                                         product_listing[i].packing_dimension,
                                         product_listing[i].expiry_date,
                                         product_listing[i].manufacturing_date,
-                                        product_listing[i].manufacturing_location
+                                        product_listing[i].manufacturing_location,
+                                        product_listing[i].manufacturing_batchid
                                         );
         }
         return temp;

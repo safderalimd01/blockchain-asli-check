@@ -6,7 +6,7 @@ import logo from "./../../../img/Product.png"
 
 class Popup extends React.Component {  
   render() {  
-    
+    console.log(this.props)
   return (  
     <div className='popup' >  
       <div className='popup_inner' style={{fontSize:"15px",fontFamily:"Lato"}}>  
@@ -26,6 +26,7 @@ class Popup extends React.Component {
         <p style={{margin:"0px"}}>Manufacturing Location = {this.props.manufacture_location}</p>
         <p style={{margin:"0px"}}>Manfacture Date = {this.props.manufacture_date}</p> 
         <p style={{margin:"0px"}}>Expiry Date = {this.props.expiry_date}</p> 
+        <p style={{margin:"0px"}}>Manufacturing Batch Id = {this.props.manufacturing_batchid}</p> 
         <p style={{margin:"0px"}}>Hash = {this.props.qrHashGrid}</p> 
 
       </div>

@@ -7,7 +7,7 @@ export function MyCommandCell({ editField, tenant }) {
         render() {
             const { dataItem } = this.props;
             const inEdit = dataItem[editField];
-            var products = "Product Name = " + dataItem.product_name +", Product UPC = " + dataItem.product_uns+", Weight = " + dataItem.weight+", Dimension = " + dataItem.packing_dimension+", Manufacturing Location = " + dataItem.manufacturing_location+", Manfacture Date = " + dataItem.manufacturing_date+", Expiry Date = " + dataItem.expiry_date + ", Hash = " +dataItem.product_hash
+            var products = "Product Name = " + dataItem.product_name +", Product UPC = " + dataItem.product_uns+", Weight = " + dataItem.weight+", Dimension = " + dataItem.packing_dimension+", Manufacturing Location = " + dataItem.manufacturing_location+", Manfacture Date = " + dataItem.manufacturing_date+", Expiry Date = " + dataItem.expiry_date + ", Manufacturing Batch Id = " + dataItem.manufacturing_batchid+", Hash = " +dataItem.product_hash
             return inEdit ? null : (<td className="">
                 <QRCode
                             id={dataItem.id}

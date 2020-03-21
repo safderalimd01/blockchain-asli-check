@@ -36,19 +36,7 @@ class QRHashGrid extends React.Component {
         }else{
             this.state.apartment = "QR Grid";
         }
-        if(this.props.location.pathname === "/tenant/apartment/grid"){
-            this.state.tenant = true;
-            for (let i = 0; i <= products.length; i++) {
-                if(products[i] !== undefined){
-                    if(products[i]['ProductID'].toString() === this.props.location.search.slice(4)){
-                        this.state.buildingName = products[i]['ProductName']
-                    }
-                }
-            }
-        }
-        if(this.props.qr_hash.qrHashGrid!== null){
-            // this.state.data[0]["ProductName"] = this.props.qr_hash.product
-        }
+        
     }
     
     lastSelectedIndex = 0;
@@ -62,7 +50,7 @@ class QRHashGrid extends React.Component {
     createState(skip, take) {
         return {
             data: [],
-            total: products.length,
+            total: 0,
             skip: skip,
             pageSize: take,
             take:take,
@@ -89,13 +77,13 @@ class QRHashGrid extends React.Component {
     }
     async componentDidMount(){
         const account = await web3.eth.personal.getAccounts();
-        var get_product_hash = await product_Abi_address.methods.getProductHash(0).call()
+        // var get_product_hash = await product_Abi_address.methods.getProductHash(0).call()
         var get_product = await product_Abi_address.methods.getProducts().call()
         var count = 0;
         this.setState({
             data: get_product.map(dataItem => Object.assign({ selected: false, id: count++}, dataItem)).slice(this.state.skip, this.state.skip + this.state.take),
             all_accounts:account,
-            total: get_product_hash.length,
+            total: get_product.length,
             pageSize: this.state.take,
             pageable: {
                 buttonCount: 0,
@@ -195,12 +183,7 @@ class QRHashGrid extends React.Component {
         this.setState({
             data: filterBy(this.state.data.map(dataItem => Object.assign({ selected: false }, dataItem)), {
                 logic: "or",
-                filters: [{ field: "apartment_name", operator: "contains", value: event.target.value },
-                { field: "street", operator: "contains", value: event.target.value },
-                { field: "locality", operator: "contains", value: event.target.value },
-                { field: "orderDate", operator: "contains", value: event.target.value },
-                { field: "Opened_units", operator: "contains", value: event.target.value },
-                { field: "Rented_units", operator: "contains", value: event.target.value },
+                filters: [{ field: "product_name", operator: "contains", value: event.target.value }
                 ]
             }),
         });
@@ -209,7 +192,8 @@ class QRHashGrid extends React.Component {
     onClickButton = (event) => {
         if (event === "cancel") {
             this.setState({
-                searchButton: false
+                searchButton: false,
+                data:this.state.data
             })
         }
         if (event === "search") {
@@ -234,6 +218,7 @@ class QRHashGrid extends React.Component {
     }
 
     render() {
+        console.log(this.state.data)
         return (
             <div>
                 <div className="" style={{ margin:"16px" }}>
