@@ -384,7 +384,7 @@ class QRHashGrid extends React.Component {
                                     }
                                 />
                                
-                                <Column field="product_uns"  title="Product Name" />
+                                <Column field="product_name"  title="Product Name" />
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell} title="QR Image"/>
                                 <Column field="apartment_name" filterable={false} cell={this.CommandCell2} title="Decode"/>
                     
@@ -404,8 +404,6 @@ class QRHashGrid extends React.Component {
         
     }
 }
-// export default App;
-
 QRHashGrid.propTypes = {
     qr_hash: PropTypes.object.isRequired
   };

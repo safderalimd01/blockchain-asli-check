@@ -12,7 +12,7 @@ class Popup extends React.Component {
         <h5 style={{marginBottom:"10x"}}>Hash:{this.props.qrHashGrid}</h5> 
         
         <h5 style={{marginBottom:"10x"}}>Product: {this.props.product}</h5> 
-        <h5 style={{marginBottom:"10x"}}>Manufacturer: {this.props.Manufacturer}</h5>  
+        <h5 style={{marginBottom:"10x"}}>Manufacturer: {this.props.product_uns}</h5>  
         <h5>Location:{this.props.manufacture_location}</h5> 
         <h5>Weight: {this.props.Weight}</h5> 
         <h5>Dimensions: {this.props.Dimensions}</h5> 

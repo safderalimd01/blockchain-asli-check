@@ -17,7 +17,6 @@ class NewQRHashInsert extends React.Component {
   
   constructor(props) {
     super(props);
-
     this.state = {
       success: false,
       value: new Date(),
@@ -39,32 +38,22 @@ class NewQRHashInsert extends React.Component {
       this.state.apartment = "QR Grid";
       this.state.link = "/apartment/grid";
     }
-    
-
   }
   onClickButton = (event) => {
     if(event === "cancel"){
       this.props.history.push('/qr_hash/grid');
     }
-    
     if(event === "add_new_unit"){
       this.props.history.push("/apartment/new-unit/add");
     }
-    
   }
   onChange = e => {
     const value = e.target.value;
     this.setState({
       [e.target.name]: value
-
     })
   }
-  
   render() {
-  
-    
-
-    
     return (
       <div>
         <div style={{marginLeft: "45px"}}>
@@ -92,27 +81,23 @@ class NewQRHashInsert extends React.Component {
                           label="Product"
                           value={this.state.Product}
                           onChange={this.onChange}
-                          
                         />
                       </div>
-                      
                     </div>
                     <div className="row">
                       
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
-                          name="Manufacturer"
+                          name="Product_uns"
                           style={{ width: "100%" }}
-                          label="Manufacturer"
-                          value={this.state.Manufacturer}
+                          label="Product_uns"
+                          value={this.state.Product_uns}
                           onChange={this.onChange}
                         />
                       </div>
-                      
                     </div>
                     <div className="row">
-                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -123,10 +108,8 @@ class NewQRHashInsert extends React.Component {
                           onChange={this.onChange}
                         />
                       </div>
-                      
                     </div>
                     <div className="row">
-                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -137,10 +120,8 @@ class NewQRHashInsert extends React.Component {
                           onChange={this.onChange}
                         />
                       </div>
-                      
                     </div>
                     <div className="row">
-                     
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -151,7 +132,6 @@ class NewQRHashInsert extends React.Component {
                           onChange={this.onChange}
                         />
                       </div>
-                      
                     </div>
                     <div className="row">
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
@@ -165,10 +145,8 @@ class NewQRHashInsert extends React.Component {
                             onChange={this.onChange}
                           />
                       </div>
-                      
                     </div>
                     <div className="row">
-                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                       <Input
                           className="input_field"
@@ -180,10 +158,8 @@ class NewQRHashInsert extends React.Component {
                           onChange={this.onChange}
                         />
                       </div>
-                      
                     </div>
                     <div className="row">
-                      
                       <div className="col-sm-12 col-xs-12 col-md-4 col-lg-4">
                         <Input
                           className="input_field"
@@ -195,8 +171,6 @@ class NewQRHashInsert extends React.Component {
                         />
                       </div>
                     </div>
-                    
-                    
                     <div className="row">
                       <div className="col-md-4 col-sm-12 col-xs-12 xol-lg-4">
                         <div style={{ marginTop:"10px",display:"none"}}>
@@ -217,13 +191,10 @@ class NewQRHashInsert extends React.Component {
                       </div>
                     </div>
                   </fieldset>
-                  
                 </form>
               </div>
             </div>
-
           </div>
-
           {
             this.state.success && (<div className="k-loading-mask">
               <span className="k-loading-text">Loading</span>
@@ -262,11 +233,10 @@ class NewQRHashInsert extends React.Component {
     event.preventDefault();
     
     var hash = sha256.create();
-    hash.update(this.state.Product, this.state.Manufacturer, this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,this.state.expiry_date,"https://www.google.com/");
+    hash.update(this.state.Product, this.state.Product_uns, this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,this.state.expiry_date,"https://www.google.com/");
     var hash_value = hash.hex();
-    console.log(product_Abi_address.methods)
     const account = await web3.eth.personal.getAccounts();
-    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product, this.state.Manufacturer,this.state.Weight,this.state.Dimensions,this.state.expiry_date,this.state.manufacture_date,this.state.manufacture_location)
+    const new_product = await product_Abi_address.methods.createproduct(hash_value,this.state.Product_uns,this.state.Product, this.state.Weight,this.state.Dimensions,this.state.expiry_date,this.state.manufacture_date,this.state.manufacture_location)
     .send({
           from:account[0], 
           gas:3000000
@@ -294,7 +264,7 @@ class NewQRHashInsert extends React.Component {
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink)
-      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.state.Manufacturer,this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,new_product,this.state.Weight,this.state.Dimensions,this.props.history)
+      this.props.fnQRHashCreateNew(hash_value,this.state.Product, this.state.Product_uns,this.state.manufacture_location,this.state.manufacture_date, this.state.expiry_date,new_product,this.state.Weight,this.state.Dimensions,this.props.history)
     } }, 3000);
   }
   

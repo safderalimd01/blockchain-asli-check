@@ -18,20 +18,20 @@ export function MyCommandCell2({ editField, tenant }) {
         render() {
             const { dataItem } = this.props;
             const inEdit = dataItem[editField];
-            
+            console.log(dataItem)
             return inEdit ? null : (<td className="">
                 <Button className="button-save-details" onClick={this.togglePopup.bind(this)}>Decode</Button>
                 {this.state.showPopup ? 
                 <Popup
-                    text={tenant.qr_hash}
-                    qrHashGrid={tenant.qr_hash.qrHashGrid}
-                    product={tenant.qr_hash.product}
-                    Manufacturer={tenant.qr_hash.Manufacturer}
-                    manufacture_location={tenant.qr_hash.manufacture_location}
-                    manufacture_date={tenant.qr_hash.manufacture_date}
-                    expiry_date={tenant.qr_hash.expiry_date}
-                    Weight={tenant.qr_hash.Weight}
-                    Dimensions={tenant.qr_hash.Dimensions}
+                    text={dataItem.product_name}
+                    qrHashGrid={dataItem.product_hash}
+                    product={dataItem.product_name}
+                    product_uns={dataItem.product_uns}
+                    manufacture_location={dataItem.manufacturing_location}
+                    manufacture_date={dataItem.manufacturing_date}
+                    expiry_date={dataItem.expiry_date}
+                    Weight={dataItem.weight}
+                    Dimensions={dataItem.packing_dimension}
                     closePopup={this.togglePopup.bind(this)}
                 />
                 : null
