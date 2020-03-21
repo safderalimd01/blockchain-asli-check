@@ -91,7 +91,7 @@ class NewQRHashInsert extends React.Component {
                           className="input_field"
                           name="Product_uns"
                           style={{ width: "100%" }}
-                          label="Product_uns"
+                          label="Product_upc"
                           value={this.state.Product_uns}
                           onChange={this.onChange}
                         />
