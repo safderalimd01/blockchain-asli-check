@@ -179,9 +179,10 @@ class QRHashGrid extends React.Component {
         this.forceUpdate();
     }
 
-    handleChange = (event) => {
+    handleChange =async (event) => {
+        var get_product = await product_Abi_address.methods.getProducts().call()
         this.setState({
-            data: filterBy(this.state.data.map(dataItem => Object.assign({ selected: false }, dataItem)), {
+            data: filterBy(get_product.map(dataItem => Object.assign({ selected: false }, dataItem)), {
                 logic: "or",
                 filters: [{ field: "product_name", operator: "contains", value: event.target.value }
                 ]
